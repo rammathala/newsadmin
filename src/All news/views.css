@@ -1,0 +1,49 @@
+.topti{
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.top2,.top3{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.top3{
+    margin-right: 10px;
+}
+.aci{
+    font-size: 30px !important;
+}
+.top3 >p{
+    position: relative;
+    z-index: 2;
+    font-weight: 800;
+    background-color: green;
+    color: white;
+    margin-left: -10px;
+    margin-top: -5px;
+    padding:4px 9px;
+    border-radius: 50%;
+}
+.topti >h1{
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-size: 25px;
+}
+.backd{
+    border: 2px solid black;
+    padding: 5px 10px;
+    transition: 0.3s all;
+}
+.backd:hover{
+    background-color: black;
+    color: white;
+    cursor: pointer;
+    transition: 0.4s all;
+    border-radius: 5px;
+    border: 2px solid white;
+}
+.backd:active{
+    scale: 0.95;
+}

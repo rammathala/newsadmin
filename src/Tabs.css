@@ -1,0 +1,26 @@
+.Tabs{
+    height: 60px;
+    border-top: 2px solid rgb(228, 225, 225);
+    width: 90%;
+    display: flex;
+    align-items: center;
+    //position: fixed;
+   //z-index: 1;
+    //width: 100%;
+    //margin-top: 5.1em;
+}
+.Tabs > a{
+    margin: 0 20px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s ease-in-out;
+    padding: 0 1em;
+}
+.Tabs > a:hover{
+    background-color: rgb(11, 11, 11);
+    color: white;
+    cursor: pointer;
+    
+}

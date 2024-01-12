@@ -1,0 +1,63 @@
+.Po >img{
+    width: 100%;
+    object-fit: contain;
+}
+.Po{
+  width: 90%;
+  padding: 10px 0;
+}
+.Poo{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 10px 0;
+    background-color: rgba(225, 225, 216, 0.408);
+    padding: 10px 0;
+}
+.but1{
+    min-width: 142px;
+    padding: 9px;
+    border-radius: 5px;
+    margin-right:10px !important ;
+}
+.but2{
+    margin-left: 10px !important;
+}
+.buttons{
+    transition: 0.3s all;
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed white;
+    width: max-content;
+    padding: 15px 20px;
+    background-color: #eceffc;
+}
+.textarea{
+    height:auto;
+}
+.linksoo{
+    color:white;
+    background-color:yellowgreen;
+    padding: 5px 15px;
+    border-radius: 10px 100px/120px 100px;
+    transition: 0.3s all;
+    display: block;
+    width: max-content;
+    margin-left: 20px;
+    font-weight: 500;
+    
+}
+.linksoo:hover{
+    scale: 1.06;
+    text-decoration: underline;
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+.rlar{
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+   
+}

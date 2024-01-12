@@ -1,0 +1,24 @@
+.Allnews{
+   
+    height: 100vh;
+}
+.postcat1{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 0 30px;
+}
+.all1{
+    margin: 25px;
+    width: max-content;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gd{
+   background-color: black;
+    color: white;
+    padding: 6px 12px;
+    transition: 0.3s all;
+}

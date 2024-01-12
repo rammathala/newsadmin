@@ -1,0 +1,46 @@
+.Header{
+   
+    background-color:white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: fixed;
+    z-index: 1;
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+.Header1{
+    height:80px;
+    background-color:white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+.logo{
+    margin-left:10em ;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.Navs{
+    flex: 0.4;
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+    margin-right: 10em;
+}
+.Navs >a{
+    margin: 0 10px;
+    transition: 0.3s ease-in;
+}
+.Navs >a:hover{
+    border-bottom: 2px solid black;
+    cursor: pointer;
+    padding: 5px 17px;
+    
+}
+.slo{
+    height: 70px;
+}

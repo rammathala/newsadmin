@@ -1,0 +1,78 @@
+.Container{
+   background-color: white;
+    display: flex;
+   justify-content: center;
+   align-items: first baseline;
+    padding: 80px 0;
+    height: 100vh;
+    margin-top: 5em;
+}
+
+.hea{
+    background-color: rgb(220, 222, 224);
+    width: 100%;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    margin-top: 10px;
+}
+.hea >h4{
+    background-color: brown;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    height: 100%;
+    padding: 0 35px;
+}
+.new{
+    display: flex;
+    flex-direction: column;
+   align-items: left;
+   justify-content: center;
+   text-align: left;
+   width: 90vw;
+}
+.Images{
+    display: flex;
+    align-items:center;
+    justify-content: center;
+    height: 90vh ;
+    margin-top: 50px;
+    
+}
+.left >img{
+    width: 100%;
+    
+}
+.left{
+    width: 60%;
+    display: flex;
+    align-items: left;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 10px;
+    height: 100%;
+
+}
+.Right{
+    width: 40%;
+    display: flex;
+   
+    flex-direction: column;
+    margin: 0 10px;
+    height: 100%;
+}
+.i1{
+     width: 100%;
+     height: 50%;
+}
+.i2{
+ width: 100%;
+ height: 50%;
+}
+.i1 >img,.i2>img{
+    width: 100%;
+    height: 80%;
+}
