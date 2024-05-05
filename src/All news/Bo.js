@@ -4,6 +4,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { Button } from '@mui/material'
 import db, { storage } from '../firebase';
+import toast,{Toaster} from 'react-hot-toast';
 function Bo({title,image,desc,stamp,id,stitle,links}) {
   const[edit ,setedit] = useState(false)
   const [title1,settitle1] = useState(title)
@@ -11,6 +12,7 @@ function Bo({title,image,desc,stamp,id,stitle,links}) {
   const [desc1,setdesc1] = useState(desc)
   const [art1,setart1] = useState('')
   const [image1,setimage1] = useState('')
+
     const stamps = new Date(stamp.toDate()).toLocaleString()
 
     function del(){
@@ -31,9 +33,10 @@ function Bo({title,image,desc,stamp,id,stitle,links}) {
          links:art1
          
      },{merge:true}).then(
-       alert('updated')
+      upload(id)
+      
      )
-   setedit(false)
+
    };
     
 
@@ -42,23 +45,28 @@ function Bo({title,image,desc,stamp,id,stitle,links}) {
  }
 
  const upload =(id)=>{
-   const uploadtask = storage.ref('images')
-   .child(image.name)
-   .put(image);
+   const uploadtask = storage.ref('Business')
+   .child(image1.name)
+   .put(image1);
    uploadtask.on(
      "state_changed",
      (snapshot)=>{
-      
+      const progress = Math.round(snapshot.bytesTransferred/snapshot.totalBytes)*100;
+      toast.success('Uploading'+ progress +'%')
      },
      (err)=>{
        console.log(err)
      },()=>{
-       storage.ref('images').child(image.name).getDownloadURL().then(imageurl=>{
-          db.collection('Political').doc(id).update({
+       storage.ref('Business').child(image1.name).getDownloadURL().then(imageurl=>{
+          db.collection('Business').doc(id).update({
            image:imageurl
           })
        })
+       toast.success('Successfully Uploaded the news!')     
+       setedit(false)
+
      }
+   
    )
   
  } 
@@ -81,6 +89,8 @@ function Bo({title,image,desc,stamp,id,stitle,links}) {
             <Button variant='contained'  type='submit'>Post</Button>
             <Button variant='contained' onClick={()=>setedit(false)}>Cancel Edit</Button>
            </form>
+           <Toaster position="top-right"
+  reverseOrder={false}/>
     </div>
 
    :
@@ -97,7 +107,6 @@ function Bo({title,image,desc,stamp,id,stitle,links}) {
   <Button className='but2' variant='contained' onClick={del} startIcon={<DeleteForeverIcon/>}>
   delete
 </Button>
-
 </div>
 </div>}
 </div> 
