@@ -4,6 +4,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { Button } from '@mui/material'
 import db, { storage } from '../firebase';
+import toast,{Toaster} from 'react-hot-toast';
 function Lo({title,image,desc,stamp,id,stitle,links}) {
   const[edit ,setedit] = useState(false)
    const [title1,settitle1] = useState(title)
@@ -30,9 +31,8 @@ function update1(e){
        artlink:art1
          
      },{merge:true}).then(
-       alert('updated')
+       upload(id)
      )
-   setedit(false)
    };
     
 
@@ -41,22 +41,25 @@ function update1(e){
  }
 
  const upload =(id)=>{
-   const uploadtask = storage.ref('images')
-   .child(image.name)
-   .put(image);
+   const uploadtask = storage.ref('images-local')
+   .child(image1.name)
+   .put(image1);
    uploadtask.on(
      "state_changed",
      (snapshot)=>{
-      
+      const progress = Math.round(snapshot.bytesTransferred/snapshot.totalBytes)*100;
+      toast.success('Uploading'+ progress +'%')
      },
      (err)=>{
        console.log(err)
      },()=>{
-       storage.ref('images').child(image.name).getDownloadURL().then(imageurl=>{
-          db.collection('Political').doc(id).update({
+       storage.ref('images-local').child(image1.name).getDownloadURL().then(imageurl=>{
+          db.collection('Local').doc(id).update({
            image:imageurl
           })
        })
+       toast.success('Successfully updated!')
+        setedit(false)
      }
    )
   
@@ -80,6 +83,8 @@ function update1(e){
             <Button variant='contained'  type='submit'>Post</Button>
             <Button variant='contained' onClick={()=>setedit(false)}>Cancel Edit</Button>
            </form>
+           <Toaster position="top-right"
+  reverseOrder={false}/>
     </div>
 
    :
