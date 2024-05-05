@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom'
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 import write from './writing.png'
 import db, { storage }  from'./firebase'
-import correct from './correct.png'
-import news from './newspaper.png'
 import { serverTimestamp } from 'firebase/firestore'
+import toast,{Toaster} from 'react-hot-toast';
 function Education({admin,aid,setuser}) {
   const [title ,settitle] = useState('')
   const [desc ,setdesc] = useState('')
@@ -39,7 +38,7 @@ function Education({admin,aid,setuser}) {
     setartlink('')
     setsubtitle('')
     setpop(true)
-    setTimeout(popout,1500)
+
   }
    else{
     localStorage.removeItem('user')
@@ -53,7 +52,8 @@ function Education({admin,aid,setuser}) {
     uploadtask.on(
       "state_changed",
       (snapshot)=>{
-       
+        const progress = Math.round(snapshot.bytesTransferred/snapshot.totalBytes)*100;
+        toast.success('Uploading'+ progress +'%')
       },
       (err)=>{
         console.log(err)
@@ -63,6 +63,8 @@ function Education({admin,aid,setuser}) {
             image:imageurl
            })
         })
+        toast.success('Successfully Uploaded the news!')
+        setpop(false)
       }
     )
    
@@ -70,19 +72,9 @@ function Education({admin,aid,setuser}) {
   const changefile = (e)=>{
     setimage(e.target.files[0])
 }
-  const popout = ()=>{
-    setpop(false)
-  }
   return (
     <div className='Political'>
-       {pop ? (<div className='popale' >
-          <div className='popcard'>
-            <img className='neico' src={news}/>
-          <p> News Added successfully </p>
-          <img src={correct}/>
-      </div>  
-         
-        </div>):(    <div className='form'>
+          <div className='form'>
            <form onSubmit={eappend}>
             <h2>Educational News <img src={write}></img></h2>
             <h5>News Title:</h5>
@@ -95,12 +87,24 @@ function Education({admin,aid,setuser}) {
             <input type='file' required onChange ={changefile}/>
             <h5>Article links</h5>
             <input type='text' value={artlink} onChange ={(e)=>setartlink(e.target.value)}/>
-            <Button variant='contained' type='submit'>Post</Button>
+            <Button disabled={pop} variant='contained' type='submit'>Post</Button>
             <Link to={'/dashboard'}><IconButton className='bacarr'><KeyboardBackspaceIcon className='bacarr1'/></IconButton></Link>
+            { pop && <div className='alert'>
+              <div className='left'>
+              <img width="48" height="48" src="https://img.icons8.com/color/48/general-warning-sign.png" alt="general-warning-sign"/>
+              </div>
+              <div className='aright'>
+              <p className='wait'>Please Wait!</p>
+              <p>News Article is uploading...</p>
+              </div>
+              
+              </div>}  
            </form>
+           <Toaster position="top-right"
+  reverseOrder={false}/>
     </div>
           
-        )}
+        
 
 </div>
   )
