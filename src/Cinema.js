@@ -7,6 +7,7 @@ import db, { storage } from './firebase'
 import correct from './correct.png'
 import news from './newspaper.png'
 import { serverTimestamp } from 'firebase/firestore'
+import toast,{Toaster} from 'react-hot-toast';
 function Cinema({admin,setuser,aid}) {
   const [title ,settitle] = useState('')
   const [subtitle ,setsubtitle] = useState('')
@@ -38,7 +39,6 @@ function Cinema({admin,setuser,aid}) {
     setdesc('')
     setartlink('')
     setpop(true)
-    setTimeout(popout,1500)
   }
   else{
     localStorage.removeItem('user')
@@ -52,7 +52,8 @@ function Cinema({admin,setuser,aid}) {
     uploadtask.on(
       "state_changed",
       (snapshot)=>{
-       
+        const progress = Math.round(snapshot.bytesTransferred/snapshot.totalBytes)*100;
+        toast.success('Uploading'+ progress +'%')
       },
       (err)=>{
         console.log(err)
@@ -62,6 +63,8 @@ function Cinema({admin,setuser,aid}) {
             image:imageurl
            })
         })
+        toast.success('Successfully Uploaded the news!')
+        setpop(false)
       }
     )
    
@@ -74,14 +77,7 @@ function Cinema({admin,setuser,aid}) {
   }
   return (
     <div className='Political'>
-       {pop ? (<div className='popale' >
-          <div className='popcard'>
-            <img className='neico' src={news}/>
-          <p> News Added successfully </p>
-          <img src={correct}/>
-      </div>  
-         
-        </div>):(<div className='form'>
+      <div className='form'>
            <form onSubmit={cappend}>
            <h2>Cinema News <img src={write}></img> </h2>
             <h5>News Title:</h5>
@@ -94,10 +90,22 @@ function Cinema({admin,setuser,aid}) {
             <input type='file' required onChange ={changefile}/>
             <h5>Article links</h5>
             <input type='text' value={artlink} onChange ={(e)=>setartlink(e.target.value)}/>
-            <Button variant='contained'type='submit'>Post</Button>
+            <Button disabled={pop} variant='contained'type='submit'>Post</Button>
             <Link to={'/dashboard'}><IconButton className='bacarr'><KeyboardBackspaceIcon className='bacarr1'/></IconButton></Link> 
+            { pop && <div className='alert'>
+              <div className='left'>
+              <img width="48" height="48" src="https://img.icons8.com/color/48/general-warning-sign.png" alt="general-warning-sign"/>
+              </div>
+              <div className='aright'>
+              <p className='wait'>Please Wait!</p>
+              <p>News Article is uploading...</p>
+              </div>
+              
+              </div>}  
            </form>
-    </div>)}
+           <Toaster position="top-right"
+  reverseOrder={false}/>
+    </div>
     
 </div>
   )
